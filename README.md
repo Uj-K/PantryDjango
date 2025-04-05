@@ -50,7 +50,6 @@ The goal of this project is to build a **practical** and **user-friendly** groce
 ---
 ## Acknowledgements
 
-This app is dedicated to all the kids with "borderline-hoarder" parents.  
 It was inspired by my mom, who loves to keep our fridge and pantry well-stocked... maybe *a little* too well-stocked.   
 
 The name "PantryDjango" is a playful nod to the cool Quentin Tarantino film *Django*, and also to the way "refrigerator" (냉장고) sounds in Korean.
