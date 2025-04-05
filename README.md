@@ -3,7 +3,7 @@
   <img src="./logo.png" alt="PantryDjango Logo" width="200"/>
 </p>
 
-**PantryDjango** is a web application that helps users keep track of the food items in their refrigerator and pantry — so they don’t miss expiration dates or waste food!  
+**PantryDjango** is an application that helps users keep track of the food items in their refrigerator and pantry — so they don’t miss expiration dates or waste food!  
 It’s designed to reduce food waste and improve kitchen organization, making everyday life a little fresher and more efficient.
 
 The goal of this project is to build a **practical** and **user-friendly** grocery inventory manager using **ASP.NET Core** and **Microsoft SQL Server**, with **GitHub** used for source control.
@@ -48,6 +48,13 @@ The goal of this project is to build a **practical** and **user-friendly** groce
 
 
 ---
+## Acknowledgements
+
+This app is dedicated to all the kids with "borderline-hoarder" parents.  
+It was inspired by my mom, who loves to keep our fridge and pantry well-stocked... maybe *a little* too well-stocked.   
+
+The name "PantryDjango" is a playful nod to the cool Quentin Tarantino film *Django*, and also to the way "refrigerator" (냉장고) sounds in Korean.
+
 
 
 
