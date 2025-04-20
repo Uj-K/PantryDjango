@@ -58,6 +58,7 @@ namespace PantryDjango.Controllers
         {
             if (ModelState.IsValid)
             {
+                foodItem.AddedAt = DateTime.Now; // Set current time
                 _context.Add(foodItem);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -97,6 +98,7 @@ namespace PantryDjango.Controllers
             {
                 try
                 {
+                    foodItem.UpdatedAt = DateTime.Now; // Set current time
                     _context.Update(foodItem);
                     await _context.SaveChangesAsync();
                 }
