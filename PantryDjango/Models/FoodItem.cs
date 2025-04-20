@@ -32,13 +32,16 @@ namespace PantryDjango.Models
         [RegularExpression("kg|g|L|mL|pcs", ErrorMessage = "Unit must be one of the following: kg, g, L, mL, pcs.")]
         public string? Unit { get; set; }
 
-        
-        // date when the food item was added to the pantry or fridge  
-        public DateTime AddedAt { get; set; } 
 
-        // date when the food item was last updated  
-        public DateTime UpdatedAt { get; set; } 
-        
+        /*AddedAt과 UpdatedAt이 항상 값이 설정되도록 기본값을 추가합니다.*/
+        // date when the food item was added to the pantry or fridge  
+        [ScaffoldColumn(false)]
+        public DateTime AddedAt { get; set; } = DateTime.Now;
+
+        // date when the food item was last updated
+        [ScaffoldColumn(false)] /*FoodItem 클래스에서 AddedAt과 UpdatedAt은 Scaffold 뷰에 자동으로 나오지 않도록 [ScaffoldColumn(false)] 어노테이션을 달아줍니다.*/
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
         // food category 
         public enum FoodCategory
         {
