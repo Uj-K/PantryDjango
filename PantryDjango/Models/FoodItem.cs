@@ -34,10 +34,10 @@ namespace PantryDjango.Models
 
 
         // date when the food item was added to the pantry or fridge  
-        public DateOnly AddedAt { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+        public DateOnly? AddedAt { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
         // date when the food item was last updated  
-        public DateOnly UpdatedAt { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+        public DateOnly? UpdatedAt { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
         // food category 
         public enum FoodCategory
@@ -51,6 +51,7 @@ namespace PantryDjango.Models
         }
 
         public FoodCategory Category { get; set; }
+
 
         // location of the food item 
         public enum StorageLocation
