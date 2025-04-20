@@ -32,13 +32,13 @@ namespace PantryDjango.Models
         [RegularExpression("kg|g|L|mL|pcs", ErrorMessage = "Unit must be one of the following: kg, g, L, mL, pcs.")]
         public string? Unit { get; set; }
 
-
+        
         // date when the food item was added to the pantry or fridge  
-        public DateOnly? AddedAt { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+        public DateTime AddedAt { get; set; } 
 
         // date when the food item was last updated  
-        public DateOnly? UpdatedAt { get; set; } = DateOnly.FromDateTime(DateTime.Now);
-
+        public DateTime UpdatedAt { get; set; } 
+        
         // food category 
         public enum FoodCategory
         {
@@ -62,7 +62,7 @@ namespace PantryDjango.Models
             Other
         }
 
-        public StorageLocation? Location { get; set; }
+        public StorageLocation Location { get; set; }
 
     }
 }
