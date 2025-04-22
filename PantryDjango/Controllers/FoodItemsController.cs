@@ -12,9 +12,9 @@ namespace PantryDjango.Controllers
 {
     public class FoodItemsController : Controller
     {
-        private readonly FoodItemContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public FoodItemsController(FoodItemContext context)
+        public FoodItemsController(ApplicationDbContext context)
         {
             _context = context;
         }
