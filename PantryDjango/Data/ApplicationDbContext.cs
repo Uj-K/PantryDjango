@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PantryDjango.Models;
 
 namespace PantryDjango.Data
 {
@@ -9,5 +10,7 @@ namespace PantryDjango.Data
             : base(options)
         {
         }
+
+        public DbSet<FoodItem> FoodItems { get; set; }
     }
 }
