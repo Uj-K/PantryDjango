@@ -4,9 +4,9 @@ using PantryDjango.Models;
 
 namespace PantryDjango.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class FoodDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public FoodDbContext(DbContextOptions<FoodDbContext> options)
             : base(options)
         {
         }
