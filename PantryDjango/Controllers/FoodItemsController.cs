@@ -58,6 +58,7 @@ namespace PantryDjango.Controllers
         {
             if (ModelState.IsValid)
             {
+                foodItem.ExpirationDate = foodItem.ExpirationDate.Date;
                 foodItem.AddedAt = DateTime.Now; // Set current time
                 _context.Add(foodItem);
                 await _context.SaveChangesAsync();
@@ -98,6 +99,7 @@ namespace PantryDjango.Controllers
             {
                 try
                 {
+                    foodItem.ExpirationDate = foodItem.ExpirationDate.Date;
                     foodItem.UpdatedAt = DateTime.Now; // Set current time
                     _context.Update(foodItem);
                     await _context.SaveChangesAsync();

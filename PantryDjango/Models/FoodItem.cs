@@ -21,7 +21,8 @@ namespace PantryDjango.Models
         [StringLength(500)]
         public string? Description { get; set; }
 
-        // date when the food will be expired  
+        // date when the food will be expired
+        [Display(Name = "Expiration Date")]
         public DateTime ExpirationDate { get; set; }
 
         // number of items if the food item is more than one  
@@ -36,10 +37,12 @@ namespace PantryDjango.Models
         /*AddedAt과 UpdatedAt이 항상 값이 설정되도록 기본값을 추가합니다.*/
         // date when the food item was added to the pantry or fridge  
         [ScaffoldColumn(false)]
+        [Display(Name = "Added at")]
         public DateTime AddedAt { get; set; } = DateTime.Now;
 
         // date when the food item was last updated
         [ScaffoldColumn(false)] /*FoodItem 클래스에서 AddedAt과 UpdatedAt은 Scaffold 뷰에 자동으로 나오지 않도록 [ScaffoldColumn(false)] 어노테이션을 달아줍니다.*/
+        [Display(Name = "Updated at")]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
         // food category 
