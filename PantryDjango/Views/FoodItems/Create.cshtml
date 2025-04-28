@@ -6,7 +6,7 @@
     ViewData["Title"] = "Add New Item";
 }
 
-<h2>What did you get?</h2>
+<h2 style="font-family: 'Single Day', cursive;">What did you get?</h2>
 
 <hr />
 <div class="row">
@@ -70,14 +70,11 @@
             <span asp-validation-for="Location" class="text-danger"></span>
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-secondary" />
+                <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
