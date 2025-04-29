@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace PantryDjango.Models
@@ -23,6 +24,7 @@ namespace PantryDjango.Models
 
         // date when the food will be expired
         [Display(Name = "Expiration Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime ExpirationDate { get; set; }
 
         // number of items if the food item is more than one  
@@ -38,6 +40,7 @@ namespace PantryDjango.Models
         // date when the food item was added to the pantry or fridge  
         [ScaffoldColumn(false)]
         [Display(Name = "Added at")]
+        [BindNever] // Prevents binding during Edit
         public DateTime AddedAt { get; set; } = DateTime.Now;
 
         // date when the food item was last updated

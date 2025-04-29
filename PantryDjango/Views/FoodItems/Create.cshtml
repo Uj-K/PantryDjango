@@ -20,7 +20,6 @@
             </div>
             <span asp-validation-for="Name" class="text-danger"></span> @*빈칸으로 두면 주의주는 기능*@
 
-
             <div class="input-group mb-3">
                 <span class="input-group-text" id="nameLabel">Description</span>
                 <input asp-for="Description" class="form-control" aria-describedby="nameLabel" />
@@ -70,7 +69,7 @@
             <span asp-validation-for="Location" class="text-danger"></span>
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-secondary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
             </div>
         </form>
