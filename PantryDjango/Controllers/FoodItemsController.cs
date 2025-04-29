@@ -99,8 +99,19 @@ namespace PantryDjango.Controllers
             {
                 try
                 {
-                    foodItem.ExpirationDate = foodItem.ExpirationDate.Date;
-                    foodItem.UpdatedAt = DateTime.Now; // Set current time
+                    // Retrieve the existing entity from the database
+                    var existingFoodItem = await _context.FoodItems.AsNoTracking().FirstOrDefaultAsync(f => f.Id == id);
+                    if (existingFoodItem == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Preserve the AddedAt value
+                    foodItem.AddedAt = existingFoodItem.AddedAt;
+
+                    // Update the UpdatedAt timestamp
+                    foodItem.UpdatedAt = DateTime.Now;
+
                     _context.Update(foodItem);
                     await _context.SaveChangesAsync();
                 }

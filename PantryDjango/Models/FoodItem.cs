@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace PantryDjango.Models
@@ -38,6 +39,7 @@ namespace PantryDjango.Models
         // date when the food item was added to the pantry or fridge  
         [ScaffoldColumn(false)]
         [Display(Name = "Added at")]
+        [BindNever] // Prevents binding during Edit
         public DateTime AddedAt { get; set; } = DateTime.Now;
 
         // date when the food item was last updated
