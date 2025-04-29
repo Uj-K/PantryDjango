@@ -24,6 +24,7 @@ namespace PantryDjango.Models
 
         // date when the food will be expired
         [Display(Name = "Expiration Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime ExpirationDate { get; set; }
 
         // number of items if the food item is more than one  
