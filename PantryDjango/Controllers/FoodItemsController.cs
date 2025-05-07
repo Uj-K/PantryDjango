@@ -20,9 +20,27 @@ namespace PantryDjango.Controllers
         }
 
         // GET: FoodItems
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            return View(await _context.FoodItems.ToListAsync());
+            // 정렬 상태를 ViewData에 저장
+            ViewData["ExpirationDateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "date_desc" : "";
+            ViewData["CurrentSort"] = sortOrder; // 현재 정렬 상태 저장
+
+            var foodItems = from f in _context.FoodItems
+                            select f;
+
+            // 정렬 로직
+            switch (sortOrder)
+            {
+                case "date_desc":
+                    foodItems = foodItems.OrderByDescending(f => f.ExpirationDate);
+                    break;
+                default:
+                    foodItems = foodItems.OrderBy(f => f.ExpirationDate);
+                    break;
+            }
+
+            return View(await foodItems.AsNoTracking().ToListAsync());
         }
 
         // GET: FoodItems/Details/5
