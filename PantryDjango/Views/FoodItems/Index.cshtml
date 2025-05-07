@@ -16,7 +16,17 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ExpirationDate)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ExpirationDateSortParm"]">
+                    @Html.DisplayNameFor(model => model.ExpirationDate)
+                    @if (ViewData["CurrentSort"]?.ToString() == "date_desc")
+                    {
+                        <span>&#9660;</span> @* ▼ 내림차순 아이콘 *@
+                    }
+                    else
+                    {
+                        <span>&#9650;</span> @* ▲ 오름차순 아이콘 *@
+                    }
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Quantity)
