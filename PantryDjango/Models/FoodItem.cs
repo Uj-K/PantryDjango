@@ -35,6 +35,8 @@ namespace PantryDjango.Models
         [RegularExpression("kg|g|L|mL|pcs", ErrorMessage = "Unit must be one of the following: kg, g, L, mL, pcs.")]
         public string? Unit { get; set; }
 
+        [StringLength(50)]
+        public string? Barcode { get; set; }
 
         /*AddedAt과 UpdatedAt이 항상 값이 설정되도록 기본값을 추가합니다.*/
         // date when the food item was added to the pantry or fridge  

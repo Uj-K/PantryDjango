@@ -72,7 +72,7 @@ namespace PantryDjango.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,ExpirationDate,Quantity,Unit,AddedAt,UpdatedAt,Category,Location")] FoodItem foodItem)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,ExpirationDate,Quantity,Unit,Barcode,AddedAt,UpdatedAt,Category,Location")] FoodItem foodItem)
         {
             if (ModelState.IsValid)
             {
