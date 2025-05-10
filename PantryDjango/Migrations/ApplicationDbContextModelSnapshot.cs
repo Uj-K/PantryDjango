@@ -235,6 +235,10 @@ namespace PantryDjango.Migrations
                     b.Property<DateTime>("AddedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Barcode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<int>("Category")
                         .HasColumnType("int");
 

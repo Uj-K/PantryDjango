@@ -12,7 +12,7 @@ using PantryDjango.Data;
 namespace PantryDjango.Migrations
 {
     [DbContext(typeof(FoodDbContext))]
-    [Migration("20250422061139_Initial")]
+    [Migration("20250510093347_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -237,6 +237,10 @@ namespace PantryDjango.Migrations
 
                     b.Property<DateTime>("AddedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Barcode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Category")
                         .HasColumnType("int");

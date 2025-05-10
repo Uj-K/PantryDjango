@@ -109,11 +109,14 @@
                 html5QrCode.start(
                     { facingMode: "environment" },
                     { fps: 10, qrbox: 250 },
-                    decodedText => {
-                        const input = document.getElementById("barcodeInput");
-                        if (input) {
-                            input.value = decodedText;
+                    async decodedText => {
+                        const barcodeInput = document.getElementById("barcodeInput");
+                        if (barcodeInput) {
+                            barcodeInput.value = decodedText;
                             console.log("Scanned and set:", decodedText);
+
+                            // Fetch product details based on the barcode
+                            await fetchProductDetails(decodedText);
                         } else {
                             console.warn("❌ barcodeInput field not found.");
                         }
@@ -121,6 +124,30 @@
                     },
                     error => {}
                 ).catch(err => console.error("Camera error:", err));
+            }
+
+            async function fetchProductDetails(barcode) {
+                try {
+                    // Simulate an API call to fetch product details
+                    const response = await fetch(`/api/products?barcode=${barcode}`);
+                    if (!response.ok) {
+                        console.error("Failed to fetch product details.");
+                        return;
+                    }
+
+                    const product = await response.json();
+
+                    // Populate the form fields with the product details
+                    document.querySelector("input[name='Name']").value = product.name || "";
+                    document.querySelector("input[name='Description']").value = product.description || "";
+                    document.querySelector("input[name='ExpirationDate']").value = product.expirationDate || "";
+                    document.querySelector("input[name='Quantity']").value = product.quantity || "";
+                    document.querySelector("input[name='Unit']").value = product.unit || "";
+                    document.querySelector("select[name='Category']").value = product.category || "";
+                    document.querySelector("select[name='Location']").value = product.location || "";
+                } catch (error) {
+                    console.error("Error fetching product details:", error);
+                }
             }
 
             // 바깥에서도 사용 가능하게 글로벌 함수로 할당

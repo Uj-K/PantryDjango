@@ -22,6 +22,7 @@ namespace PantryDjango.Controllers
         // GET: FoodItems
         public async Task<IActionResult> Index(string sortOrder)
         {
+
             // 정렬 상태를 ViewData에 저장
             ViewData["ExpirationDateSortParm"] = String.IsNullOrEmpty(sortOrder) ? "date_desc" : "";
             ViewData["CurrentSort"] = sortOrder; // 현재 정렬 상태 저장
