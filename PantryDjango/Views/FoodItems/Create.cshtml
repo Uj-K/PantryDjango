@@ -14,6 +14,19 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <!-- Barcode input and scan -->
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="barcodeLabel">Barcode</span>
+                <input type="text" id="barcodeInput" name="Barcode" class="form-control" aria-describedby="barcodeLabel" placeholder="Scan barcode or enter manually" />
+            </div>
+
+            <div class="mb-3">
+                <button type="button" class="btn btn-outline-secondary" onclick="startScanner()">Start Scanner</button>
+            </div>
+
+            <!-- Camera view -->
+            <div id="reader" style="width: 300px; margin-bottom: 20px;"></div>
+
             <div class="input-group mb-3">
                 <span class="input-group-text" id="nameLabel">Name</span>
                 <input asp-for="Name" class="form-control" aria-describedby="nameLabel" />
@@ -78,4 +91,40 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <!-- Html5Qrcode CDN -->
+    <script src="https://unpkg.com/html5-qrcode"></script>
+
+    <!-- Scanner Funtion -->
+    <script>
+        let html5QrCode;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            function startScanner() {
+                if (html5QrCode) {
+                    html5QrCode.stop().then(() => html5QrCode.clear());
+                }
+
+                html5QrCode = new Html5Qrcode("reader");
+                html5QrCode.start(
+                    { facingMode: "environment" },
+                    { fps: 10, qrbox: 250 },
+                    decodedText => {
+                        const input = document.getElementById("barcodeInput");
+                        if (input) {
+                            input.value = decodedText;
+                            console.log("Scanned and set:", decodedText);
+                        } else {
+                            console.warn("❌ barcodeInput field not found.");
+                        }
+                        html5QrCode.stop();
+                    },
+                    error => {}
+                ).catch(err => console.error("Camera error:", err));
+            }
+
+            // 바깥에서도 사용 가능하게 글로벌 함수로 할당
+            window.startScanner = startScanner;
+        });
+    </script>
 }
