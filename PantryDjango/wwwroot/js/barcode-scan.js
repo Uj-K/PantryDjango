@@ -15,7 +15,13 @@ document.getElementById('startScan').addEventListener('click', async () => {
         const barcode = result.text;
 
         document.getElementById("Barcode").value = barcode;
-        codeReader.reset();
+
+        // 카메라 종료
+        const stream = videoElement.srcObject;
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+            videoElement.srcObject = null;
+        }
 
         const res = await fetch(`https://world.openfoodfacts.org/api/v0/product/${barcode}.json`);
         const data = await res.json();
