@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PantryDjango.Data;
 using PantryDjango.Models;
+using PantryDjango.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PantryDjango.Controllers
 {
@@ -83,6 +84,20 @@ namespace PantryDjango.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(foodItem);
+        }
+
+        // ⬇️ AJAX로 OCR 요청 받을 엔드포인트
+        [HttpPost]
+        public async Task<IActionResult> OcrOnly(IFormFile imageFile)
+        {
+            if (imageFile == null || imageFile.Length == 0)
+                return Content("");
+
+            using var stream = imageFile.OpenReadStream();
+            var ocr = new OcrService(@"C:\Program Files\Tesseract-OCR\tessdata");
+            var result = ocr.ExtractExpiryDateFromStream(stream);
+
+            return Content(result); // 날짜 문자열만 반환
         }
 
         // GET: FoodItems/Edit/5
@@ -186,5 +201,6 @@ namespace PantryDjango.Controllers
         {
             return _context.FoodItems.Any(e => e.Id == id);
         }
+
     }
 }
