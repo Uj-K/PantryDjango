@@ -23,7 +23,6 @@
                 <input asp-for="Barcode" id="Barcode" class="form-control" />
             </div>
 
-
             <div class="input-group mb-3">
                 <span class="input-group-text">Name</span>
                 <input asp-for="Name" id="Name" class="form-control" />
@@ -37,11 +36,11 @@
             </div>
             <span asp-validation-for="Description" class="text-danger"></span>
 
-            <!-- 🔴 OCR 카메라 뷰 -->
-            <div class="mb-3">
-                <video id="video-preview" autoplay playsinline width="100%" height="300" style="border:1px solid gray;"></video>
-                <button type="button" id="capture-button" class="btn btn-secondary mt-2">📸 사진 찍고 유통기한 인식</button>
-            </div>
+            <!-- OCR용 카메라 뷰 (바코드 스타일 재사용) -->
+            <button type="button" id="startOcr" class="btn btn-outline-secondary mb-3">📷 Scan Expiration Date</button>
+            <video id="ocr-video" width="100" height="200" style="border: 1px solid black;"></video>
+            <canvas id="ocr-canvas" style="display:none;"></canvas>
+
 
             <!-- 🔵 OCR 결과가 입력될 유통기한 -->
             <div class="input-group mb-3">
@@ -49,7 +48,6 @@
                 <input asp-for="ExpirationDate" type="date" class="form-control" id="ExpirationDate" />
             </div>
 
-            <canvas id="canvas" style="display:none;"></canvas>
    
             @*예전거는 주석처리함.
             <div class="input-group mb-3">
@@ -104,6 +102,7 @@
 }
 
 <script type="module" src="~/js/barcode-scan.js"></script>
-
 <script type="module" src="~/js/ocr.js"></script>
+
+
 
