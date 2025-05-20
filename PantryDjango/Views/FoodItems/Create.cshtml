@@ -16,7 +16,7 @@
 
             <!-- 바코드 스캔 버튼 -->
             <button type="button" id="startScan" class="btn btn-outline-secondary mb-3">📷 Scan Barcode</button>
-            <video id="video-preview" width="100" height="200" style="border: 1px solid black;"></video>
+            <video id="video-preview" width="200" height="100" style="border: 1px solid black;"></video>
 
             <div class="input-group mb-3">
                 <span class="input-group-text">Barcode</span>
@@ -37,8 +37,8 @@
             <span asp-validation-for="Description" class="text-danger"></span>
 
             <!-- OCR용 카메라 뷰 (바코드 스타일 재사용) -->
-            <button type="button" id="startOcr" class="btn btn-outline-secondary mb-3">📷 Scan Expiration Date</button>
-            <video id="ocr-video" width="100" height="200" style="border: 1px solid black;"></video>
+            <button type="button" id="startOcr" class="btn btn-outline-secondary mb-3">Scan Expiration Date</button>
+            <video id="ocr-video" width="200" height="100" style="border: 1px solid black;"></video>
             <canvas id="ocr-canvas" style="display:none;"></canvas>
 
 

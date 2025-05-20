@@ -25,7 +25,7 @@
             // 4. 캡처된 이미지를 blob으로 변환
             canvas.toBlob(async (blob) => {
                 if (!blob) {
-                    alert("이미지 캡처 실패");
+                    alert("Image capture failed");
                     return;
                 }
 
@@ -39,11 +39,11 @@
                 });
 
                 const result = await response.text();
-                alert("OCR 인식 결과:\n" + result);
-                if (result && !result.includes("실패")) {
+                alert("OCR recognition results:\n" + result);
+                if (result && !result.includes("Fail")) {
                     document.getElementById("ExpirationDate").value = result;
                 } else {
-                    alert("유통기한을 인식하지 못했어요. 다시 시도해주세요!");
+                    alert("The expiration date was not recognized. Please try again.!");
                 }
 
                 // 6. 카메라 끄기
@@ -52,7 +52,7 @@
         }, 500); // 0.5초 대기 후 캡처
 
     } catch (err) {
-        console.error("카메라 접근 오류:", err);
-        alert("카메라를 사용할 수 없습니다.");
+        console.error("Camera access error:", err);
+        alert("Camera is not available.");
     }
 });

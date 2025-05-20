@@ -91,7 +91,7 @@ namespace PantryDjango.Controllers
         public async Task<IActionResult> OcrOnly(IFormFile imageFile)
         {
             if (imageFile == null || imageFile.Length == 0)
-                return Content("이미지 없음");
+                return Content("No image");
 
             using var stream = imageFile.OpenReadStream();
             var ocr = new OcrService(@"C:\Program Files\Tesseract-OCR\tessdata");
