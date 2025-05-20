@@ -87,18 +87,18 @@ namespace PantryDjango.Controllers
             return View(foodItem);
         }
 
-        // ⬇️ AJAX로 OCR 요청 받을 엔드포인트
         [HttpPost]
         public async Task<IActionResult> OcrOnly(IFormFile imageFile)
         {
             if (imageFile == null || imageFile.Length == 0)
-                return Content("");
+                return Content("이미지 없음");
 
             using var stream = imageFile.OpenReadStream();
             var ocr = new OcrService(@"C:\Program Files\Tesseract-OCR\tessdata");
-            var result = ocr.ExtractExpiryDateFromStream(stream);
 
-            return Content(result); // 날짜 문자열만 반환
+            string rawText = ocr.ExtractExpiryDateFromStream(stream, "kor+eng"); // Use the correct method
+
+            return Content(rawText); // Return the extracted text
         }
 
         // GET: FoodItems/Edit/5

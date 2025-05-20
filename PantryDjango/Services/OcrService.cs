@@ -19,6 +19,7 @@ namespace PantryDjango.Services
             using var page = engine.Process(img);
 
             var text = page.GetText();
+            Console.WriteLine("OCR 결과:\n" + text); // 디버깅용
             var match = Regex.Match(text, @"\d{4}[-./]\d{2}[-./]\d{2}");
             return match.Success ? match.Value : "날짜 인식 실패";
         }

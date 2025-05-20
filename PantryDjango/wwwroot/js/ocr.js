@@ -17,8 +17,8 @@
 
         // 3. 0.5초 뒤 자동 캡처 (유저가 별도 버튼 안 눌러도 됨)
         setTimeout(() => {
-            canvas.width = video.videoWidth;
-            canvas.height = video.videoHeight;
+            canvas.width = video.videoWidth * 2; // 해상도 증가
+            canvas.height = video.videoHeight * 2; // 해상도 증가
             const context = canvas.getContext("2d");
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
@@ -39,6 +39,7 @@
                 });
 
                 const result = await response.text();
+                alert("OCR 인식 결과:\n" + result);
                 if (result && !result.includes("실패")) {
                     document.getElementById("ExpirationDate").value = result;
                 } else {
