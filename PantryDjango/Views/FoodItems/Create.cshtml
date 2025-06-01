@@ -99,6 +99,31 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const expirationInput = document.getElementById('ExpirationDate');
+
+            if (!expirationInput) {
+                console.error("ExpirationDate input을 찾을 수 없습니다.");
+                return;
+            }
+
+            // (1) 사용자가 날짜를 선택하거나 바꿨을 때, 과거면 alert
+            expirationInput.addEventListener('change', function () {
+                const expValue = expirationInput.value;
+                if (expValue) {
+                    const selectedDate = new Date(expValue);
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    selectedDate.setHours(0, 0, 0, 0);
+
+                    if (selectedDate < today) {
+                        alert('This date is past, are you sure?');
+                    }
+                }
+            });
+        });
+    </script>
 }
 
 <script type="module" src="~/js/barcode-scan.js"></script>
