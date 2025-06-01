@@ -47,14 +47,25 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model) 
+ {
+     var daysUntilExpire = (item.ExpirationDate - DateTime.Today).TotalDays;
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ExpirationDate)
+                    @if (daysUntilExpire <= 3 && daysUntilExpire >= 0)
+                    {
+                        <span class="badge bg-warning text-dark ms-2">Expiring Soon</span>
+                    }
+                    @if (daysUntilExpire < 0)
+                    {
+                        <span class="badge bg-danger text-white ms-2">Expired</span>
+                    }
             </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
