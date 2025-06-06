@@ -9,85 +9,90 @@
 <p>
     <a class="btn btn-secondary" asp-action="Create">Click here to add new item!</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["ExpirationDateSortParm"]">
-                    @Html.DisplayNameFor(model => model.ExpirationDate)
-                    @if (ViewData["CurrentSort"]?.ToString() == "date_desc")
-                    {
-                        <span>&#9660;</span> @* ▼ 내림차순 아이콘 *@
-                    }
-                    else
-                    {
-                        <span>&#9650;</span> @* ▲ 오름차순 아이콘 *@
-                    }
-                </a>
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Unit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th> @*이거 지우니까 윗줄이 짧아지네?*@ 
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) 
- {
-     var daysUntilExpire = (item.ExpirationDate - DateTime.Today).TotalDays;
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExpirationDate)
-                    @if (daysUntilExpire <= 3 && daysUntilExpire >= 0)
-                    {
-                        <span class="badge bg-warning text-dark ms-2">Expiring Soon</span>
-                    }
-                    @if (daysUntilExpire < 0)
-                    {
-                        <span class="badge bg-danger text-white ms-2">Expired</span>
-                    }
-            </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Unit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary ms-2">Edit</a> 
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-secondary ms-2">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger ms-2">Delete</a>
-            </td>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["ExpirationDateSortParm"]">
+                        @Html.DisplayNameFor(model => model.ExpirationDate)
+                        @if (ViewData["CurrentSort"]?.ToString() == "date_desc")
+                        {
+                            <span>&#9660;</span> @* ▼ 내림차순 아이콘 *@
+                        }
+                        else
+                        {
+                            <span>&#9650;</span> @* ▲ 오름차순 아이콘 *@
+                        }
+                    </a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Unit)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th></th> @*이거 지우니까 윗줄이 짧아지네?*@ 
         </tr>
-}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                var daysUntilExpire = (item.ExpirationDate - DateTime.Today).TotalDays;
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExpirationDate)
+                        @if (daysUntilExpire <= 3 && daysUntilExpire >= 0)
+                        {
+                            <span class="badge bg-warning text-dark ms-2">Expiring Soon</span>
+                        }
+                        @if (daysUntilExpire < 0)
+                        {
+                            <span class="badge bg-danger text-white ms-2">Expired</span>
+                        }
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Unit)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+
+                    <td>
+                        <div class="d-flex flex-wrap gap-2">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary ms-2">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-secondary ms-2">Details</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger ms-2">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
