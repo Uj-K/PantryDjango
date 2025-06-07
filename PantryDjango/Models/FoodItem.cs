@@ -32,6 +32,7 @@ namespace PantryDjango.Models
         public int Quantity { get; set; }
 
         // unit of measurement for the food item (e.g., kg, g, L, mL, etc.)  
+        [ScaffoldColumn(false)]
         [RegularExpression("kg|g|L|mL|pcs", ErrorMessage = "Unit must be one of the following: kg, g, L, mL, pcs.")]
         public string? Unit { get; set; }
 
