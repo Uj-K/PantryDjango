@@ -31,6 +31,7 @@ document.getElementById('startScan').addEventListener('click', async () => {
             document.getElementById("Name").value = product.product_name || "";
             document.getElementById("Quantity").value = product.quantity || "";
             document.getElementById("Categories").value = product.categories || "";
+            document.getElementById("Description").value = product.ingredients_text || "";
         } else {
             alert("The product could not be found.");
         }
