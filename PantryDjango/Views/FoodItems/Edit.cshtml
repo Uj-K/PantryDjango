@@ -40,12 +40,6 @@
             </div>
 
             <div class="mb-3">
-                <label asp-for="Unit" class="form-label">Unit</label>
-                <input asp-for="Unit" class="form-control" />
-                <span asp-validation-for="Unit" class="text-danger"></span>
-            </div>
-
-            <div class="mb-3">
                 <label asp-for="Category" class="form-label">Category</label>
                 <select asp-for="Category"
                         asp-items="Html.GetEnumSelectList<FoodCategory>()"
