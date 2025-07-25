@@ -1,4 +1,5 @@
-﻿import { BrowserMultiFormatReader } from 'https://cdn.jsdelivr.net/npm/@zxing/browser@latest/+esm';
+﻿// 바코드 스캔 기능을 구현하기 위한 JavaScript 코드 Xzing 라이브러리를 사용합니다.
+import { BrowserMultiFormatReader } from 'https://cdn.jsdelivr.net/npm/@zxing/browser@latest/+esm';
 
 const codeReader = new BrowserMultiFormatReader();
 const videoElement = document.getElementById('video-preview');
