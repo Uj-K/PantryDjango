@@ -6,43 +6,47 @@ const videoElement = document.getElementById('video-preview');
 
 document.getElementById('startScan').addEventListener('click', async () => {
     try {
-        // 사용자가 Scan 버튼을 클릭하면 카메라를 시작하는 곳
-        const devices = await BrowserMultiFormatReader.listVideoInputDevices();
-        if (devices.length === 0) {
-            alert("Camera not found.");
-            return;
-        }
-        // 카메라로 바코드를 스캔
-        const result = await codeReader.decodeOnceFromVideoDevice(devices[0].deviceId, videoElement);
-        const barcode = result.text;
+        // ZXing 라이브러리로 바코드 스캔 시작
+        await codeReader.decodeOnceFromVideoDevice(
+            undefined,  // 장치를 직접 고르지 않고 constraints로 선택
+            videoElement,
+            (result, error) => {
+                if (result) {
+                    const barcode = result.getText();
+                    document.getElementById("Barcode").value = barcode;
 
-        // 스캔된 바코드 값을 입력 필드에 설정
-        document.getElementById("Barcode").value = barcode;
+                    // 카메라 종료
+                    const stream = videoElement.srcObject;
+                    if (stream) {
+                        stream.getTracks().forEach(track => track.stop());
+                        videoElement.srcObject = null;
+                    }
 
-        // 카메라 종료
-        const stream = videoElement.srcObject;
-        if (stream) {
-            stream.getTracks().forEach(track => track.stop());
-            videoElement.srcObject = null;
-        }
-
-        // 이후 바코드 정보를 이용해 Open Food Facts API를 호출하여 제품 정보를 가져옴
-        const res = await fetch(`https://world.openfoodfacts.org/api/v0/product/${barcode}.json`);
-        const data = await res.json();
-
-        // API 응답의 status가 1(성공)이면, 상품 정보를 각 input에 자동으로 채움
-        if (data.status === 1) {
-            const product = data.product;
-            document.getElementById("Name").value = product.product_name || "";
-            document.getElementById("Quantity").value = product.quantity || "";
-            document.getElementById("Categories").value = product.categories || "";
-            document.getElementById("Description").value = product.ingredients_text || "";
-        } else {
-            alert("The product could not be found.");
-        }
+                    // OpenFoodFacts API 호출
+                    fetch(`https://world.openfoodfacts.org/api/v0/product/${barcode}.json`)
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.status === 1) {
+                                const product = data.product;
+                                document.getElementById("Name").value = product.product_name || "";
+                                document.getElementById("Quantity").value = product.quantity || "";
+                                document.getElementById("Categories").value = product.categories || "";
+                                document.getElementById("Description").value = product.ingredients_text || "";
+                            } else {
+                                alert("The product could not be found.");
+                            }
+                        });
+                }
+            },
+            {
+                video: {
+                    facingMode: { ideal: "environment" } // 후면 카메라 사용
+                }
+            }
+        );
 
     } catch (err) {
-        console.error(err);
+        console.error("Error during barcode scanning:", err);
         alert("An error occurred during scanning.");
     }
 });
