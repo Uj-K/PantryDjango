@@ -4,7 +4,7 @@
 
     try {
         // 1. 카메라 접근
-        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+        const stream = await navigator.mediaDevices.getUserMedia({ video: { ideal: "environment" } }); // Make efault to rear camera
         video.srcObject = stream;
 
         // 2. 영상 재생 보장
