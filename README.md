@@ -12,8 +12,7 @@ The goal of this project is to build a **practical** and **user-friendly** groce
 
 ## Screenshots 
 
-![](video/PantryDjango.gif)
-
+<img src="video/PantryDjango.gif" width="450"/>
 ---
 
 ## Key Features
