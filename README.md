@@ -10,7 +10,9 @@ The goal of this project is to build a **practical** and **user-friendly** groce
 
 ---
 
-## Screenshots (Coming Soon!!)
+## Screenshots 
+
+![](video/PantryDjango.gif)
 
 ---
 
